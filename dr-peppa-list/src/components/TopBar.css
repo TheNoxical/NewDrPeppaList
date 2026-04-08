@@ -1,0 +1,64 @@
+#topbar {
+    background-color: #338129;
+    width: 100%;
+    height: 100px;
+    margin-top: 0;
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: rgba(0, 0, 0, 0.5) 3px solid;
+}
+
+#tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33.3%
+}
+
+img {
+    padding: 10px;
+}
+
+code {
+    margin-left: 10px;
+    font-size: xx-large;
+}
+
+button.submit {
+    height: 40px;
+    border-radius: 10px;
+    border: #338129;
+    font-size: large;
+    background-color: #bddeb8;
+}
+
+button.submit:hover {
+    transform: scale(1.05);
+    transition: all 0.1s ease-in-out;
+    background-color: #ced8cc;
+}
+
+button.submit:active {
+    transform: scale(0.95);
+}
+
+#imageStuff {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 33.3%;
+}
+
+#userStuff {
+    display: flex;
+    align-items: center;
+    width: 33.3%;
+    justify-content: flex-end;
+}
+
+.active {
+    background-color: #42ae33;
+}

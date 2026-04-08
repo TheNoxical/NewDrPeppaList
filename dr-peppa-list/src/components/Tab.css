@@ -1,0 +1,27 @@
+button.tab {
+    height: 50px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border: #338129;
+    background-color: #338129;
+    font-size: x-large;
+}
+
+button.tab:hover {
+    transform: scale(1.05);
+    transition: all 0.1s ease-in-out;
+    background-color: #42ae33;
+}
+
+button.tab:active {
+    transform: scale(0.95);
+}
+
+button.tab.active {
+    background-color: #42ae33;
+}
