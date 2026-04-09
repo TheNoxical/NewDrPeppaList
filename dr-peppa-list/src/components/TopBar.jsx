@@ -1,33 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './TopBar.css';
-import Tab from './Tab.jsx';
 import placeholder from '../assets/placeholder.png'
+import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom'
+import { Test1, Test2, Test3 } from './Test.jsx';
+import './Tab.css';
 
-class TopBar extends Component {
-    
-    constructor() {
-        super();
-        this.state = {
-            activeTab: "List"
-        };
-    }
 
-    onChangeActive = (event) => {
-        this.setState({ activeTab: event.target.textContent });
-    }
-    
-    render() {
-        return (
+function TopBar() {
+
+    return (
+        <BrowserRouter>
             <div id="topbar">
                 <div id="imageStuff">
                     <img src={placeholder} alt="logo" height="50px" width="50px" />
                     <h1>DPL</h1>
-                    <code>v0.0.1</code>
+                        <code>v0.0.1</code>
                 </div>
                 <div id="tabs">
-                    <Tab text="List" isActive={(this.state.activeTab === "List") ? "true" : ""} changeActive={this.onChangeActive} />
-                    <Tab text="Leaderboard" isActive={(this.state.activeTab === "Leaderboard") ? "true" : ""} changeActive={this.onChangeActive} />
-                    <Tab text="Packs" isActive={(this.state.activeTab === "Packs") ? "true" : ""} changeActive={this.onChangeActive} />
+                    <NavLink to="/" className="tab">List</NavLink>
+                    <NavLink to="/Leaderboard" className="tab">Leaderboard</NavLink>
+                    <NavLink to="/Packs" className="tab">Packs</NavLink>
                 </div>
                 <div id="userStuff">
                     <button className="submit">Submit A Record</button>
@@ -35,8 +27,13 @@ class TopBar extends Component {
                     <img src={placeholder} alt="user icon" height="50px" width="50px" />
                 </div>
             </div>
-        );
-    }
+            <Routes>
+                <Route path="/" element={<Test1 />} />
+                <Route path="/Leaderboard" element={<Test2 />} />
+                <Route path="/Packs" element={<Test3 />} />
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default TopBar;

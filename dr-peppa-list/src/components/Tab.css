@@ -1,4 +1,4 @@
-button.tab {
+/* button.tab {
     height: 50px;
     margin: 10px;
     display: flex;
@@ -10,18 +10,43 @@ button.tab {
     border: #338129;
     background-color: #338129;
     font-size: x-large;
-}
+} */
 
-button.tab:hover {
+.tab:hover {
     transform: scale(1.05);
     transition: all 0.1s ease-in-out;
     background-color: #42ae33;
 }
 
-button.tab:active {
+.tab:active {
     transform: scale(0.95);
 }
 
-button.tab.active {
+.tab.active {
     background-color: #42ae33;
+}
+
+:root {
+    --color-primary: #338129;
+    --color-active: #42ae33;
+}
+
+.tab {
+    height: 50px;
+    margin: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: x-large;
+    color: white;
+    font-weight: bolder;
+    font-family: 'Helvetica';
+}
+
+button.tab:not(.active) {
+    background-color: var(--color-primary);
 }
