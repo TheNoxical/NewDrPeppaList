@@ -3,4 +3,6 @@ body, html {
   padding: 0;
   border: 0;
   background-color: #1c1b1f;
+  color: white;
+  font-family: 'Quicksand';
 }

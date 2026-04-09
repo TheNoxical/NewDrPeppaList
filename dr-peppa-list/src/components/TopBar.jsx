@@ -2,7 +2,7 @@ import React from 'react';
 import './TopBar.css';
 import placeholder from '../assets/placeholder.png'
 import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom'
-import { Test1, Test2, Test3 } from './Test.jsx';
+import List from './pages/List.jsx';
 import './Tab.css';
 
 
@@ -28,9 +28,9 @@ function TopBar() {
                 </div>
             </div>
             <Routes>
-                <Route path="/" element={<Test1 />} />
-                <Route path="/Leaderboard" element={<Test2 />} />
-                <Route path="/Packs" element={<Test3 />} />
+                <Route path="/" element={<List />} />
+                <Route path="/Leaderboard" element={<h1>AHHHHHHHHH</h1>} />
+                <Route path="/Packs" element={<h1>AHHHHHHHHH</h1>} />
             </Routes>
         </BrowserRouter>
     );
