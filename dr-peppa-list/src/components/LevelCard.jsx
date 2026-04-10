@@ -1,4 +1,6 @@
 import React from 'react';
+import './LevelCard.css';
+import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom';
 
 function LevelCard(props) {
     
@@ -6,7 +8,9 @@ function LevelCard(props) {
     
     return (
         <>
-            <h1>{"#" + placement + ". " + level}</h1>
+            <div className="card">
+                <NavLink to={"/List/" + level}>{"#" + placement + ". " + level}</NavLink>
+            </div>
         </>
     );
 }

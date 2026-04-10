@@ -4,6 +4,7 @@ import placeholder from '../assets/placeholder.png'
 import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom'
 import List from './pages/List.jsx';
 import './Tab.css';
+import Info from './Info.jsx';
 
 
 function TopBar() {
@@ -17,7 +18,7 @@ function TopBar() {
                         <code>v0.0.1</code>
                 </div>
                 <div id="tabs">
-                    <NavLink to="/" className="tab">List</NavLink>
+                    <NavLink to="/List" className="tab">List</NavLink>
                     <NavLink to="/Leaderboard" className="tab">Leaderboard</NavLink>
                     <NavLink to="/Packs" className="tab">Packs</NavLink>
                 </div>
@@ -28,7 +29,9 @@ function TopBar() {
                 </div>
             </div>
             <Routes>
-                <Route path="/" element={<List />} />
+                <Route path="/List" element={<List />}>
+                    <Route path="/List/:level" element={<Info />} />
+                </Route>
                 <Route path="/Leaderboard" element={<h1>AHHHHHHHHH</h1>} />
                 <Route path="/Packs" element={<h1>AHHHHHHHHH</h1>} />
             </Routes>

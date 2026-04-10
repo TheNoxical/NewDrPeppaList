@@ -1,0 +1,15 @@
+.searchBarContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+input.searchBar {
+    width: 50%;
+    text-align: center;
+    height: 30px;
+    border-radius: 10px;
+    border: #1c1b1f solid 2px;
+    font-size: large; 
+}
