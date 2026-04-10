@@ -1,3 +1,51 @@
 {
-    "id": 88913586
+    "id": 88913586,
+    "verification": "https://www.youtube.com/embed/gssN6Ia3ySI",
+    "records": [
+        {
+            "user": "selasi",
+            "link": "https://youtu.be/gssN6Ia3ySI?si=R42QxxpAcqN4MY09",
+            "percent": 100
+        },
+        {
+            "user": "Manipulan",
+            "link": "https://youtu.be/0rbxx5mPJAk?si=gTPwE782N4rVwI14",
+            "percent": 100
+        },
+        {
+            "user": "foin",
+            "link": "https://www.youtube.com/watch?v=6ArjndWa9cg",
+            "percent": 100
+        },
+        {
+            "user": "Epsilonic70",
+            "link": "https://www.youtube.com/watch?v=cNrT-JUmGG4",
+            "percent": 100
+        },
+        {
+            "user": "fBloop",
+            "link": "https://www.youtube.com/watch?v=mgA8cTF-D5A",
+            "percent": 100
+        },
+        {
+            "user": "dofar",
+            "link": "https://youtu.be/TrfTVsJLC2s",
+            "percent": 100
+        },
+        {
+            "user": "stacer",
+            "link": "https://th.bing.com/th/id/OIP.Z9X51f4mO99PkAl1N5yBhAHaHa?rs=1&pid=ImgDetMain",
+            "percent": 94
+        },
+        {
+            "user": "dubo",
+            "link": "https://th.bing.com/th/id/OIP.Z9X51f4mO99PkAl1N5yBhAHaHa?rs=1&pid=ImgDetMain",
+            "percent": 59
+        },
+        {
+            "user": "Noxical",
+            "link": "https://th.bing.com/th/id/OIP.Z9X51f4mO99PkAl1N5yBhAHaHa?rs=1&pid=ImgDetMain",
+            "percent": 79
+        }
+    ]
 }

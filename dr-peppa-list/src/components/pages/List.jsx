@@ -6,16 +6,18 @@ import { BrowserRouter, Route, Routes, NavLink, Outlet } from 'react-router-dom'
 
 class List extends Component {
     
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
-            peppaList: [],
-            listInfo: [],
-            sortedList: [],
-            sortedData: [],
-            generatedList: [],
-            searchField: ''
+            peppaList: [], // The unordered list of levels to go on the list
+            listInfo: [], // Parallel to peppaList, except containing the extra information for the levels
+            sortedList: [], // The list of levels to go on the list, but sorted based on the selected criteria, default is AREDL
+            aredlSortedList: [], // The list of levels sorted by AREDL placements, needed for the scoring algorithm
+            sortedData: [], // A parallel list to sortedList, except containing the extra information of all the levels, needed for the Info page
+            generatedList: [], // Parallel to sortedList and sortedData, just mapped to have the CardList components so the list can actually load. This is then filtered by the search query
+            searchField: '', // Updates to contain the text in the search bar and then filters the generatedList based on this
+            hoistListToState: props.hoistFunction // Function passed down from TopBar, allowing this component to send the lists up to TopBar and then passed as props down to Info
         }
     }
 
@@ -36,8 +38,7 @@ class List extends Component {
 
                 this.sortList("aredl");
 
-
-                
+                this.setState({ aredlSortedList: this.sortList("aredl") });
 
                 
             });
@@ -118,6 +119,7 @@ class List extends Component {
 
         this.setState({ sortedList: listCopy });
         this.setState({ sortedData: data });
+        this.state.hoistListToState(this.state.listInfo, this.state.peppaList);
         this.setState({ generatedList: listComponents });
     }
 
@@ -131,12 +133,9 @@ class List extends Component {
         } else {
 
             const filteredList = this.state.generatedList.filter((level) => {
-                console.log("Level", level.props.level);
                 return level.props.level.toLowerCase().includes(this.state.searchField.toLowerCase());
             });
-
-            console.log("Filtered List", filteredList);
-            
+  
             return (
                 <div className="page">
                     <div className="cardContainer">

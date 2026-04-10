@@ -1,6 +1,6 @@
 .page {
     display: grid;
-    grid-template-columns: 33.3% 33.3% 33.3%;
+    grid-template-columns: 20% 60% 20%;
 }
 
 .cardContainer {
@@ -17,7 +17,8 @@
 .infoContainer {
     width: 100%;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     margin: 10px;
     /* background-color: rgba(84, 77, 77, 0.7);
     border-radius: 5px; */
