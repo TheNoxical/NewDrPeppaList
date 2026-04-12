@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Router, NavLink, useParams } from 'react-router-dom';
 import './Info.css'
+import { calculateMaxScore } from './score.js';
 
 function Info(props) {
     const { level } = useParams();
-    const { levelInfo, levelsList } = props;
+    const { levelInfo, levelsList, aredlSortedList } = props;
+
+    const scoreIndex = aredlSortedList.indexOf(level) + 1;
 
     const levelIndex = levelsList.indexOf(level);
 
@@ -25,14 +28,20 @@ function Info(props) {
         .then(data => setLevelCreators(data));
     }, [level]);
 
+    const mappedTags = levelInfo[levelIndex].tags.map((tag) => {
+        return <h3 key={tag} className="tag">{tag}</h3>
+    });
+
     if (!levelValues) {
         return <h1>Loading...</h1>
     } else {
+
         return (
             <>
                 <h1 className="levelName">{level}</h1>
                 <p className="levelDescription">{levelInfo[levelIndex].description}</p>
-                <iframe width="800px" height="450px" src={levelValues.verification} ></iframe>
+                <div className="levelTags">{mappedTags}</div>
+                <iframe src={levelValues.verification} ></iframe>
                 <div className="extraInfoContainer">
                     <div className="levelID">
                         <h2>Level ID</h2>
@@ -40,7 +49,7 @@ function Info(props) {
                     </div>
                     <div className="listPoints">
                         <h2>List Points</h2>
-                        <h1>Placeholder</h1>
+                        <h1>{calculateMaxScore(scoreIndex)}</h1>
                     </div>
                     <div className="edelEnjoyment">
                         <h2>EDEL Enjoyment</h2>
@@ -56,7 +65,14 @@ function Info(props) {
                     </div>
                     <div className="gddlTier">
                         <h2>GDDL Tier</h2>
-                        <h1>{Math.round(levelInfo[levelIndex].gddl_tier * 100) / 100}</h1>
+                        <h1><a className="underlineEffect" target="_blank" href={"https://gdladder.com/level/" + levelInfo[levelIndex].level_id}>{Math.round(levelInfo[levelIndex].gddl_tier * 100) / 100}</a></h1>
+                    </div>
+                    <div>
+                        <h1></h1>
+                    </div>
+                    <div className="aredlSpot">
+                        <h2>AREDL Placement</h2>
+                        <h1><a className="underlineEffect" target="_blank" href={"https://aredl.net/list/" + levelInfo[levelIndex].level_id}>#{levelInfo[levelIndex].position}</a></h1>
                     </div>
                 </div>
                 <div className="publisherInfoContainer">

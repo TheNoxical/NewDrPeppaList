@@ -14,13 +14,15 @@ class TopBar extends Component {
 
         this.state = {
             listData: [],
-            peppaList: []
+            peppaList: [],
+            aredlSortedList: []
         };
     }
 
-    hoistListToState = (listData, peppaList) => {
+    hoistListToState = (listData, peppaList, aredlSortedList) => {
         this.setState({ listData: listData });
         this.setState({ peppaList: peppaList });
+        this.setState({ aredlSortedList: aredlSortedList })
     }
     
 
@@ -39,14 +41,14 @@ class TopBar extends Component {
                         <NavLink to="/Packs" className="tab">Packs</NavLink>
                     </div>
                     <div id="userStuff">
-                        <button className="submit">Submit A Record</button>
+                        <button className="recordSubmit">Submit A Record</button>
                         <img src={placeholder} alt="discord icon" height="50px" width="50px" />
                         <img src={placeholder} alt="user icon" height="50px" width="50px" />
                     </div>
                 </div>
                 <Routes>
                     <Route path="/List" element={<List hoistFunction={this.hoistListToState} />}>
-                        <Route path="/List/:level" element={<Info levelInfo={this.state.listData} levelsList={this.state.peppaList} />} />
+                        <Route path="/List/:level" element={<Info levelInfo={this.state.listData} levelsList={this.state.peppaList} aredlSortedList={this.state.aredlSortedList}/>} />
                     </Route>
                     <Route path="/Leaderboard" element={<h1>AHHHHHHHHH</h1>} />
                     <Route path="/Packs" element={<h1>AHHHHHHHHH</h1>} />

@@ -1,17 +1,16 @@
 .page {
     display: grid;
-    grid-template-columns: 20% 60% 20%;
+    grid-template-columns: 2fr 8fr 2fr;
+    gap: 0px 20px;
 }
 
 .cardContainer {
     width: 100%;
     overflow-y: scroll;
-    scrollbar-color: green red;
     scrollbar-width: none;
     padding: 10px;
-    /* background-color: rgba(84, 77, 77, 0.7); */
-    margin: 10px;
-    /* border-radius: 5px; */
+    margin-top: 10px;
+    /* background-color: gray; */
 }
 
 .infoContainer {
@@ -20,6 +19,10 @@
     align-items: center;
     flex-direction: column;
     margin: 10px;
-    /* background-color: rgba(84, 77, 77, 0.7);
-    border-radius: 5px; */
+    /* background-color: gray; */
+}
+
+.recordsContainer {
+    /* background-color: gray; */
+    margin-top: 10px;
 }

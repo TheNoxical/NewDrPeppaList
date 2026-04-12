@@ -1,0 +1,37 @@
+.recordsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.victors {
+    overflow-y: scroll;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    scrollbar-width: none;
+    width: 100%;
+}
+
+.victorCard {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.victorCard * {
+    margin-left: 5px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.ytLogo:hover {
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;
+}
+
+.hidden {
+    display: none;
+}

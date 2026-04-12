@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './List.css';
 import LevelCard from '../LevelCard.jsx';
 import SearchBar from '../SearchBar.jsx';
+import Victors from '../Victors.jsx';
 import { BrowserRouter, Route, Routes, NavLink, Outlet } from 'react-router-dom';
 
 class List extends Component {
@@ -13,11 +14,11 @@ class List extends Component {
             peppaList: [], // The unordered list of levels to go on the list
             listInfo: [], // Parallel to peppaList, except containing the extra information for the levels
             sortedList: [], // The list of levels to go on the list, but sorted based on the selected criteria, default is AREDL
-            aredlSortedList: [], // The list of levels sorted by AREDL placements, needed for the scoring algorithm
             sortedData: [], // A parallel list to sortedList, except containing the extra information of all the levels, needed for the Info page
             generatedList: [], // Parallel to sortedList and sortedData, just mapped to have the CardList components so the list can actually load. This is then filtered by the search query
             searchField: '', // Updates to contain the text in the search bar and then filters the generatedList based on this
-            hoistListToState: props.hoistFunction // Function passed down from TopBar, allowing this component to send the lists up to TopBar and then passed as props down to Info
+            hoistListToState: props.hoistFunction, // Function passed down from TopBar, allowing this component to send the lists up to TopBar and then passed as props down to Info
+            nlwTierFilter: []
         }
     }
 
@@ -37,8 +38,6 @@ class List extends Component {
                 await this.setState({ peppaList: resp2 });
 
                 this.sortList("aredl");
-
-                this.setState({ aredlSortedList: this.sortList("aredl") });
 
                 
             });
@@ -60,6 +59,15 @@ class List extends Component {
         return responseFromAREDL;
     }
 
+    handleSubmit = (value) => {
+        const formData = new FormData(value.target);
+        const sortType = formData.get("sortType");
+        const nlwTiers = formData.getAll("nlwTier");
+        this.setState({ nlwTierFilter: nlwTiers });
+        value.preventDefault();
+        this.sortList(sortType);
+    }
+
     sortList(sortingCriteria) {
         
         const listCopy = this.state.peppaList.map(value => value);
@@ -67,21 +75,21 @@ class List extends Component {
             return {level: level, aredlSpot: this.state.listInfo[index].position, edelEnjoyment: this.state.listInfo[index].edel_enjoyment, gddlTier: this.state.listInfo[index].gddl_tier}
         })
 
-        if (sortingCriteria === "aredl") {
             // Insertion sort simultaneously on data and listCopy
-            for (let i = 1; i < data.length; i++) {
-                let j = i;
-                while (j > 0 && (data[j].aredlSpot < data[j - 1].aredlSpot)) {
-                    let dataTemp = data[j];
-                    let listCopyTemp = listCopy[j];
-                    data[j] = data[j - 1];
-                    listCopy[j] = listCopy[j - 1];
-                    data[j - 1] = dataTemp;
-                    listCopy[j - 1] = listCopyTemp;
-                    j--;
-                }
-            }    
+        for (let i = 1; i < data.length; i++) {
+            let j = i;
+            while (j > 0 && (data[j].aredlSpot < data[j - 1].aredlSpot)) {
+                let dataTemp = data[j];
+                let listCopyTemp = listCopy[j];
+                data[j] = data[j - 1];
+                listCopy[j] = listCopy[j - 1];
+                data[j - 1] = dataTemp;
+                listCopy[j - 1] = listCopyTemp;
+                j--;
+            }
         }
+        
+        const aredlSort = listCopy.map(level => level);
 
         if (sortingCriteria === "edel") {
             for (let i = 1; i < data.length; i++) {
@@ -119,7 +127,7 @@ class List extends Component {
 
         this.setState({ sortedList: listCopy });
         this.setState({ sortedData: data });
-        this.state.hoistListToState(this.state.listInfo, this.state.peppaList);
+        this.state.hoistListToState(this.state.listInfo, this.state.peppaList, aredlSort);
         this.setState({ generatedList: listComponents });
     }
 
@@ -132,18 +140,36 @@ class List extends Component {
             return <h1>Loading...</h1>
         } else {
 
-            const filteredList = this.state.generatedList.filter((level) => {
+            // First filters the list by search parameters
+            let filteredList = this.state.generatedList.filter((level) => {
                 return level.props.level.toLowerCase().includes(this.state.searchField.toLowerCase());
             });
+
+            if (this.state.nlwTierFilter.length > 0) {
+                filteredList = filteredList.filter((level) => {
+                    const levelName = level.props.level;
+                    console.log("Name:", levelName);
+                    const infoIndex = this.state.peppaList.indexOf(levelName);
+                    console.log("Filter:", this.state.nlwTierFilter);
+                    console.log("Tier:", this.state.listInfo[infoIndex].nlw_tier);
+                    if (typeof this.state.listInfo[infoIndex].nlw_tier === "object") {
+                        return false;
+                    }
+                    return this.state.nlwTierFilter.includes(this.state.listInfo[infoIndex].nlw_tier.replaceAll(' ', ''))
+                });
+            }
   
             return (
                 <div className="page">
                     <div className="cardContainer">
-                        <SearchBar placeholder="Search Levels" searchChange={this.onSearchChange} />
+                        <SearchBar placeholder="Search Levels" searchChange={this.onSearchChange} handleSubmit={this.handleSubmit} />
                         {filteredList}
                     </div>
                     <div className="infoContainer">
                         <Outlet />
+                    </div>
+                    <div className="recordsContainer">
+                        <Victors />
                     </div>
                 </div>
             );

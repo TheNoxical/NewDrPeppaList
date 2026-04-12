@@ -27,7 +27,7 @@ code {
     font-size: xx-large;
 }
 
-button.submit {
+button.recordSubmit {
     height: 40px;
     border-radius: 10px;
     border: #338129;
@@ -35,13 +35,13 @@ button.submit {
     background-color: #bddeb8;
 }
 
-button.submit:hover {
+button.recordSubmit:hover {
     transform: scale(1.05);
     transition: all 0.1s ease-in-out;
     background-color: #ced8cc;
 }
 
-button.submit:active {
+button.recordSubmit:active {
     transform: scale(0.95);
 }
 
