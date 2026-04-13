@@ -5,24 +5,23 @@
 }
 
 .cardContainer {
-    width: 100%;
+    box-sizing: border-box;
+    margin-left: 5px;
     overflow-y: scroll;
     scrollbar-width: none;
     padding: 10px;
     margin-top: 10px;
-    /* background-color: gray; */
 }
 
 .infoContainer {
-    width: 100%;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     flex-direction: column;
     margin: 10px;
-    /* background-color: gray; */
 }
 
 .recordsContainer {
-    /* background-color: gray; */
     margin-top: 10px;
+    box-sizing: border-box;
 }

@@ -13,6 +13,7 @@ function SearchBar(props) {
     const handleShow = () => setShow(true);
 
     const nlwTiers = ["Beginner", "Easy", "Medium", "Hard", "Very Hard", "Insane", "Remorseless", "Relentless", "Terrifying", "Catastrophic", "Inexorable", "Excruciating", "Fuck"];
+    const tagsList = ["2.2", "2.1", "2.0", "1.9PS", "1.9", "1.8", "1.7", "1.6PS", "1.6", "1.5", "Medium", "Long", "XL", "XXL", "XXL+", "NONG", "2P", "Circles", "Clicksync", "Fast-Paced", "Timings", "Chokepoints", "Learny", "Memory", "High CPS", "Gimmicky", "Flow", "Slow-Paced", "Precision", "Bossfight", "Mirror", "Nerve Control", "Cube", "Ship", "Ball", "UFO", "Wave", "Robot", "Spider", "Old Swing", "New Swing", "Duals", "Overall"];
 
     const nlwTierCheckboxes = nlwTiers.map((tier) => {
         const paramTier = tier.replaceAll(' ', '');
@@ -23,6 +24,15 @@ function SearchBar(props) {
             </div>
         );
     })
+
+    const tagsCheckboxes = tagsList.map((tag) => {
+        const paramTag = tag.replaceAll(' ', '');
+        return (
+            <div className="tagSelectorContainer" key={paramTag}>
+                
+            </div>
+        );
+    });
 
     return (
         <>

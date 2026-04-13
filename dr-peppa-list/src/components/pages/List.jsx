@@ -148,10 +148,7 @@ class List extends Component {
             if (this.state.nlwTierFilter.length > 0) {
                 filteredList = filteredList.filter((level) => {
                     const levelName = level.props.level;
-                    console.log("Name:", levelName);
                     const infoIndex = this.state.peppaList.indexOf(levelName);
-                    console.log("Filter:", this.state.nlwTierFilter);
-                    console.log("Tier:", this.state.listInfo[infoIndex].nlw_tier);
                     if (typeof this.state.listInfo[infoIndex].nlw_tier === "object") {
                         return false;
                     }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './TopBar.css';
 import placeholder from '../assets/placeholder.png'
-import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, NavLink, Navigate } from 'react-router-dom'
 import List from './pages/List.jsx';
+import Leaderboard from './pages/Leaderboard.jsx';
 import './Tab.css';
 import Info from './Info.jsx';
 
@@ -47,10 +48,11 @@ class TopBar extends Component {
                     </div>
                 </div>
                 <Routes>
+                    <Route path="/" element={<Navigate replace to={`/List/${this.state.aredlSortedList[0]}`} />} />
                     <Route path="/List" element={<List hoistFunction={this.hoistListToState} />}>
                         <Route path="/List/:level" element={<Info levelInfo={this.state.listData} levelsList={this.state.peppaList} aredlSortedList={this.state.aredlSortedList}/>} />
                     </Route>
-                    <Route path="/Leaderboard" element={<h1>AHHHHHHHHH</h1>} />
+                    <Route path="/Leaderboard" element={<Leaderboard />} />
                     <Route path="/Packs" element={<h1>AHHHHHHHHH</h1>} />
                 </Routes>
             </BrowserRouter>
