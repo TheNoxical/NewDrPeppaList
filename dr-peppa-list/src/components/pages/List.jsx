@@ -193,7 +193,7 @@ class List extends Component {
                     <div className="infoContainer">
                         <Outlet />
                     </div>
-                    <div className="recordsContainer">
+                    <div className="victorsContainer">
                         <Victors />
                     </div>
                 </div>
