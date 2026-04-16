@@ -35,7 +35,7 @@ class TopBar extends Component {
                     <div id="imageStuff">
                         <img src={placeholder} alt="logo" height="50px" width="50px" />
                         <h1>DPL</h1>
-                            <code>v0.0.1</code>
+                            <code>v0.1.0</code>
                     </div>
                     <div id="tabs">
                         <NavLink to="/List" className="tab">List</NavLink>
