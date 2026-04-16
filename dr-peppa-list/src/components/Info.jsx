@@ -39,7 +39,7 @@ function Info(props) {
         return (
             <>
                 <h1 className="levelName">{level}</h1>
-                <p className="levelDescription">{levelInfo[levelIndex].description}</p>
+                <p className="levelDescription">{levelInfo[levelIndex].description ? levelInfo[levelIndex].description : "This level has no description."}</p>
                 <div className="levelTags">{mappedTags}</div>
                 <iframe src={levelValues.verification} ></iframe>
                 <div className="extraInfoContainer">
@@ -110,10 +110,12 @@ function Info(props) {
 // }
 
 function peppaEnjoyment(victorsData) {
+    let totalEnjoymentCount = 0;
     const enjoymentSum = victorsData.reduce((accumulator, victor) => {
         if (victor?.enjoyment === undefined) {
             return accumulator;
         }
+        totalEnjoymentCount++;
         return accumulator + victor?.enjoyment;
     }, 0)
 
@@ -121,7 +123,10 @@ function peppaEnjoyment(victorsData) {
         return "-";
     }
 
-    let average = enjoymentSum / victorsData.length;
+    if (totalEnjoymentCount === 0) {
+        return "-";
+    }
+    let average = enjoymentSum / totalEnjoymentCount;
     average = Math.round(average * 100) / 100;
     return average;
 }
