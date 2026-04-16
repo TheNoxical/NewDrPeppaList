@@ -28,7 +28,7 @@ class List extends Component {
 
         // This gets the peppa list levels from the _list.json file
         try {
-            fetch("../../../list/_list.json").then(resp => resp.json()).then(async (resp2) => {
+            fetch("/list/_list.json").then(resp => resp.json()).then(async (resp2) => {
 
                 const levelInfoPromises = resp2.map((level) => {
                     return this.grabLevelsFromAPI(level);
@@ -52,7 +52,7 @@ class List extends Component {
     }
 
     async grabLevelsFromAPI(level) {
-        const request = await fetch("../../../list/" + level + ".json");
+        const request = await fetch("/list/" + level + ".json");
         const response = await request.json();
         const id = response.id;
         const requestToAREDL = await fetch("https://api.aredl.net/v2/api/aredl/levels/" + id);

@@ -10,7 +10,7 @@ function Victors(props) {
     const [ victorsList, setVictorsList ] = useState(null);
 
     useEffect(() => {
-        fetch(`../../list/${level}.json`)
+        fetch(`/list/${level}.json`)
         .then(res => res.json())
         .then(data => setVictorsList(data.records));
     }, [level]);

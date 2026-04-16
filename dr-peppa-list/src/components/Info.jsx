@@ -16,7 +16,7 @@ function Info(props) {
     const [ levelCreators, setLevelCreators ] = useState(null);
 
     useEffect(() => {
-        fetch(`../../list/${level}.json`)
+        fetch(`/list/${level}.json`)
         .then(res => res.json())
         .then(data => setLevelValues(data));
     }, [level]);
