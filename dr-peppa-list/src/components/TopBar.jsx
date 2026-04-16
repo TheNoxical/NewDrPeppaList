@@ -10,13 +10,14 @@ import Info from './Info.jsx';
 
 class TopBar extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             listData: [],
             peppaList: [],
-            aredlSortedList: []
+            aredlSortedList: [],
+            level: props.params
         };
     }
 
@@ -48,7 +49,7 @@ class TopBar extends Component {
                     </div>
                 </div>
                 <Routes>
-                    <Route path="/" element={<Navigate replace to={`/List/${this.state.aredlSortedList[0]}`} />} />
+                    <Route path="/" element={<Navigate replace to={`/List`} />} />
                     <Route path="/List" element={<List hoistFunction={this.hoistListToState} />}>
                         <Route path="/List/:level" element={<Info levelInfo={this.state.listData} levelsList={this.state.peppaList} aredlSortedList={this.state.aredlSortedList}/>} />
                     </Route>

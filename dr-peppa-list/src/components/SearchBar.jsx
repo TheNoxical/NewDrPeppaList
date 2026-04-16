@@ -29,7 +29,8 @@ function SearchBar(props) {
         const paramTag = tag.replaceAll(' ', '');
         return (
             <div className="tagSelectorContainer" key={paramTag}>
-                
+                <input type="checkbox" key={paramTag} value={paramTag} id={paramTag} name="tag"></input>
+                <label htmlFor={paramTag} key={paramTag + "Label"}>{tag}</label>
             </div>
         );
     });
@@ -68,6 +69,7 @@ function SearchBar(props) {
                                 </div>
                                 <div className="tagFilters">
                                     <h2>Tags</h2>
+                                    {tagsCheckboxes}
                                 </div>
                             </div>
                             <button type="submit" className="submit">Apply</button>

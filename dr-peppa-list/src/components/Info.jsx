@@ -55,9 +55,9 @@ function Info(props) {
                         <h2>EDEL Enjoyment</h2>
                         <h1>{Math.round(levelInfo[levelIndex].edel_enjoyment* 100) / 100}</h1>
                     </div>
-                    <div className="song">
-                        <h2>Song</h2>
-                        <h1>{checkSongInfo(levelInfo[levelIndex].song)}</h1>
+                    <div className="peppaEnjoyment">
+                        <h2>Peppa Enjoyment</h2>
+                        <h1>{peppaEnjoyment(levelValues.records)}</h1>
                     </div>
                     <div className="nlwTier">
                         <h2>NLW Tier</h2>
@@ -99,14 +99,31 @@ function Info(props) {
 
 }
 
-function checkSongInfo(songReturnValue) {
-    if (songReturnValue === null) {
-        return "NONG";
-    } else if (songReturnValue < 0) {
-        return "DEFAULT";
-    } else {
-        return songReturnValue;
+// function checkSongInfo(songReturnValue) {
+//     if (songReturnValue === null) {
+//         return "NONG";
+//     } else if (songReturnValue < 0) {
+//         return "DEFAULT";
+//     } else {
+//         return songReturnValue;
+//     }
+// }
+
+function peppaEnjoyment(victorsData) {
+    const enjoymentSum = victorsData.reduce((accumulator, victor) => {
+        if (victor?.enjoyment === undefined) {
+            return accumulator;
+        }
+        return accumulator + victor?.enjoyment;
+    }, 0)
+
+    if (enjoymentSum === 0) {
+        return "-";
     }
+
+    let average = enjoymentSum / victorsData.length;
+    average = Math.round(average * 100) / 100;
+    return average;
 }
 
 function mapLevelCreators(levelCreators, publisherFallback) {

@@ -31,7 +31,14 @@ function Victors(props) {
     const mappedVictors = victorsList.map((record) => {
         return (
             <div className="victorCard" key={record.user}>
-                <h3>{record.percent + "%\t\t" + record.user}</h3>
+                <div className="tooltip">
+                    <h3>{record.percent + "%\t\t" + record.user}</h3>
+                    <div className={((record.wf != undefined || record.enjoyment != undefined) && (record.percent === 100)) ? "tooltipText" : ""}>
+                        {(record.percent === 100 && record.wf != undefined) ? <h4>{"Worst Fail: " + record.wf + "%"}</h4> : ""}
+                        {(record.percent === 100 && record.enjoyment != undefined) ? <h4>{"Enjoyment: " + record.enjoyment}</h4> : ""}
+                    </div>
+                    
+                </div>
                 <a target="_blank" href={record.link} className={record.percent < 100 ? "hidden" : ""}>
                     <img className="ytLogo" src={Youtube_Icon} alt="Youtube" height="31.275" width="43.825" />
                 </a>

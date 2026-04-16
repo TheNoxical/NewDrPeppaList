@@ -138,12 +138,12 @@ form button {
     font-size: large;
 }
 
-.otherFilters {
+.otherFilters, .tagFilters {
     overflow-y: scroll;
     scrollbar-width: none;
 }
 
-.nlwCheckboxesContainer {
+.nlwCheckboxesContainer, .tagSelectorContainer {
     display: inline-block;
     margin: 5px;
 }

@@ -5,7 +5,8 @@
         {
             "user": "Zapi4",
             "link": "https://www.youtube.com/watch?v=qWg78-1-9WA",
-            "percent": 100
+            "percent": 100,
+            "enjoyment": 20
         }
     ]
 }

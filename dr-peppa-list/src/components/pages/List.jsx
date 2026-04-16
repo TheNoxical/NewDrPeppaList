@@ -18,7 +18,8 @@ class List extends Component {
             generatedList: [], // Parallel to sortedList and sortedData, just mapped to have the CardList components so the list can actually load. This is then filtered by the search query
             searchField: '', // Updates to contain the text in the search bar and then filters the generatedList based on this
             hoistListToState: props.hoistFunction, // Function passed down from TopBar, allowing this component to send the lists up to TopBar and then passed as props down to Info
-            nlwTierFilter: []
+            nlwTierFilter: [],
+            tagFilter: []
         }
     }
 
@@ -63,13 +64,16 @@ class List extends Component {
         const formData = new FormData(value.target);
         const sortType = formData.get("sortType");
         const nlwTiers = formData.getAll("nlwTier");
+        const tags = formData.getAll("tag");
+        console.log(tags);
+        this.setState({ tagFilter: tags });
         this.setState({ nlwTierFilter: nlwTiers });
         value.preventDefault();
         this.sortList(sortType);
     }
 
     sortList(sortingCriteria) {
-        
+
         const listCopy = this.state.peppaList.map(value => value);
         let data = listCopy.map((level, index) => {
             return {level: level, aredlSpot: this.state.listInfo[index].position, edelEnjoyment: this.state.listInfo[index].edel_enjoyment, gddlTier: this.state.listInfo[index].gddl_tier}
@@ -153,6 +157,16 @@ class List extends Component {
                         return false;
                     }
                     return this.state.nlwTierFilter.includes(this.state.listInfo[infoIndex].nlw_tier.replaceAll(' ', ''))
+                });
+            }
+
+            if (this.state.tagFilter.length > 0) {
+                filteredList = filteredList.filter((level) => {
+                    const levelName = level.props.level;
+                    const levelIndex = this.state.peppaList.indexOf(levelName);
+                    const tagsArray = this.state.listInfo[levelIndex].tags;
+                    const tagsSet = new Set(tagsArray);
+                    return this.state.tagFilter.some(tag => tagsSet.has(tag));
                 });
             }
   
