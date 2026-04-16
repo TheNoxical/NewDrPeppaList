@@ -1,0 +1,13 @@
+{
+    "id": 1,
+    "verification": "link/MUST BE EMBED",
+    "records": [
+        {
+            "user": "username",
+            "link": "link",
+            "percent": 100,
+            "wf": 1,
+            "enjoyment": 1
+        }
+    ]
+}
