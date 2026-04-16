@@ -28,20 +28,34 @@ class List extends Component {
 
         // This gets the peppa list levels from the _list.json file
         try {
-            fetch("/list/_list.json").then(resp => resp.json()).then(async (resp2) => {
+            // fetch("/list/_list.json").then(resp => resp.json()).then(async (resp2) => {
 
-                const levelInfoPromises = resp2.map((level) => {
-                    return this.grabLevelsFromAPI(level);
+            //     const levelInfoPromises = resp2.map((level) => {
+            //         return this.grabLevelsFromAPI(level);
+            //     });
+
+            //     await Promise.all(levelInfoPromises).then(values => this.setState({ listInfo: values }));
+                
+            //     await this.setState({ peppaList: resp2 });
+
+            //     this.sortList("aredl");
+
+                
+            // });
+            fetch("/list/_list.json")
+                .then(resp => resp.json())
+                .then(async (resp2) => {
+                    const levelInfoPromises = resp2.map((level) => this.grabLevelsFromAPI(level));
+                    const values = await Promise.all(levelInfoPromises);
+    
+                    this.setState({ 
+                        listInfo: values,
+                        peppaList: resp2 
+                    }, () => {
+                        // This callback runs AFTER setState is done, so state is guaranteed to be updated
+                        this.sortList("aredl");
+                    });
                 });
-
-                await Promise.all(levelInfoPromises).then(values => this.setState({ listInfo: values }));
-                
-                await this.setState({ peppaList: resp2 });
-
-                this.sortList("aredl");
-
-                
-            });
 
         } catch (err) {
             console.log(`There was an error fetching the peppa list: ${err}`);
