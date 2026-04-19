@@ -4,6 +4,7 @@ const pg = require('pg');
 require('dotenv').config();
 const session = require('express-session');
 const axios = require('axios');
+const pgSession = require('connect-pg-simple')(session);
 
 const app = express();
 
@@ -24,6 +25,10 @@ db.connect((err, client, release) => {
 app.use(express.json());
 
 app.use(session({
+    store: new pgSession({
+        pool: db,
+        tableName: 'session'
+    }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
