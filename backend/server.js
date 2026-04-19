@@ -100,7 +100,7 @@ app.get('/auth/discord/callback', async (req, res) => {
             
 
     } catch (err) {
-        console.log(err);
+        console.log("Error on callback", err);
         res.status(500).json({ error: 'Authentication failed' });
     }
 });
@@ -146,7 +146,6 @@ app.post('/api/setup', async (req, res) => {
 
         req.session.user = rows[0];
 
-        req.session.user = rows[0];
         console.log('Session user set:', req.session.user);
         console.log('Session ID:', req.session.id);
 
