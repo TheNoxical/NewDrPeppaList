@@ -161,6 +161,24 @@ process.on('unhandledRejection', (err) => {
     console.error('Unhandled rejection:', err);
 });
 
+
+req.session.user = rows[0];
+console.log('Session user set:', req.session.user);
+console.log('Session ID:', req.session.id);
+
+req.session.save((err) => {
+    if (err) {
+        console.error('Session save error:', err);
+    } else {
+        console.log('Session saved successfully');
+    }
+    if (!rows[0].display_name) {
+        res.redirect(`${process.env.CLIENT_URL}/setup`);
+    } else {
+        res.redirect(process.env.CLIENT_URL);
+    }
+});
+
 const PORT = process.env.PORT || 3001;
 
 console.log('Attempting to listen on port:', PORT);
