@@ -14,10 +14,26 @@ function Setup() {
         }
 
         try {
+            // const res = await fetch(`${import.meta.env.VITE_API_URL}/api/setup`, {
+            //     method: 'POST',
+            //     credentials: 'include',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ display_name: displayName })
+            // });
+
+            // if (res.ok) {
+            //     navigate('/');
+            // } else {
+            //     setError('Something went wrong, please try again');
+            // }
+
+            const token = localStorage.getItem('token');
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/setup`, {
                 method: 'POST',
-                credentials: 'include',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
                 body: JSON.stringify({ display_name: displayName })
             });
 

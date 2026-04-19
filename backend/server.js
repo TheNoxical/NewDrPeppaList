@@ -5,6 +5,7 @@ require('dotenv').config();
 const session = require('express-session');
 const axios = require('axios');
 const pgSession = require('connect-pg-simple')(session);
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
@@ -90,11 +91,25 @@ app.get('/auth/discord/callback', async (req, res) => {
             `, [id, username, email, avatar]);
 
 
-            req.session.user = rows[0];
-            if (!rows[0].display_name) {
-                res.redirect(`${process.env.CLIENT_URL}/setup`);
+            // req.session.user = rows[0];
+            // if (!rows[0].display_name) {
+            //     res.redirect(`${process.env.CLIENT_URL}/setup`);
+            // } else {
+            //     res.redirect(process.env.CLIENT_URL);  
+            // }
+
+            const user = rows[0];
+
+            const token = jwt.sign(
+                { id: user.id, discord_id: user.discord_id },
+                process.env.JWT_SECRET,
+                { expiresIn: '7d' }
+            );
+
+            if (!user.display_name) {
+                res.redirect(`${process.env.CLIENT_URL}/setup?token=${token}`);
             } else {
-                res.redirect(process.env.CLIENT_URL);  
+                res.redirect(`${process.env.CLIENT_URL}?token=${token}`);
             }
 
             
@@ -106,16 +121,36 @@ app.get('/auth/discord/callback', async (req, res) => {
 });
 
 
-app.get('/api/me', (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).json({ error: 'Not logged in' });
+app.get('/api/me', async (req, res) => {
+    // if (!req.session.user) {
+    //     return res.status(401).json({ error: 'Not logged in' });
+    // }
+
+    // res.json(req.session.user);
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+        return res.status(400).json({ error: 'Not logged in' });
     }
 
-    res.json(req.session.user);
+    const token = authHeader.split(' ')[1];
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const { rows } = await db.query(`SELECT * FROM users WHERE id = $1`, [decoded.id]);
+        if (!rows[0]) {
+            return res.status(401).json({ error: 'User not found' });
+        }
+
+        res.json(rows[0])
+    } catch (err) {
+        res.status(401).json({ error: 'Invalid token' });
+    }
 });
 
 app.get('/auth/logout', (req, res) => {
-    req.session.destroy();
+    // req.session.destroy();
+    // res.redirect(process.env.CLIENT_URL);
+
     res.redirect(process.env.CLIENT_URL);
 })
 
@@ -130,31 +165,57 @@ app.get('/api/test-db', async (req, res) => {
 
 
 app.post('/api/setup', async (req, res) => {
-    if (!req.session.user) {
+    // if (!req.session.user) {
+    //     return res.status(401).json({ error: 'Not logged in' });
+    // }
+    // try {
+    //     const { display_name } = req.body;
+
+    //     if (!display_name || display_name.trim() === '') {
+    //         return res.status(400).json({ error: 'Display name is required' });
+    //     }
+
+    //     const { rows } = await db.query(`
+    //         UPDATE users SET display_name = $1 WHERE id = $2 RETURNING *
+    //         `, [display_name, req.session.user.id]);
+
+    //     req.session.user = rows[0];
+
+    //     req.session.save((err) => {
+    //         if (err) {
+    //             console.error('Session save error:', err);
+    //             return res.status(500).json({ error: 'Failed to save session' });
+    //         }
+    //         console.log('Session saved successfully');
+    //         res.json(rows[0]);
+    //     });
+        
+    // } catch (err) {
+    //     console.log(err);
+    //     res.status(500).json({ error: 'Failed to save username' });
+    // }
+
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
         return res.status(401).json({ error: 'Not logged in' });
     }
+
+    const token = authHeader.split(' ')[1];
+
     try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const { display_name } = req.body;
 
         if (!display_name || display_name.trim() === '') {
             return res.status(400).json({ error: 'Display name is required' });
         }
 
+
         const { rows } = await db.query(`
             UPDATE users SET display_name = $1 WHERE id = $2 RETURNING *
-            `, [display_name, req.session.user.id]);
+            `, [display_name, decoded.id]);
 
-        req.session.user = rows[0];
-
-        req.session.save((err) => {
-            if (err) {
-                console.error('Session save error:', err);
-                return res.status(500).json({ error: 'Failed to save session' });
-            }
-            console.log('Session saved successfully');
-            res.json(rows[0]);
-        });
-        
+        res.json(rows[0]);
     } catch (err) {
         console.log(err);
         res.status(500).json({ error: 'Failed to save username' });
