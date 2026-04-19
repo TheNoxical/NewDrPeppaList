@@ -20,7 +20,6 @@ function UserSection() {
             <button className="logoutButton" onClick={logout}>Log Out</button>
             <div className="profileDisplay">
                 <img src={`https://cdn.discordapp.com/avatars/${user.discord_id}/${user.avatar}.png`} alt="avatar" height="50px" width="50px" className="userProfile" />
-                <strong><p className="displayNameText">{user.display_name}</p></strong>
             </div>
         </div>
     );
