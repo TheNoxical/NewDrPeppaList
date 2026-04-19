@@ -155,4 +155,8 @@ process.on('unhandledRejection', (err) => {
     console.error('Unhandled rejection:', err);
 });
 
+const PORT = process.env.PORT || 3001;
+
+console.log('Attempting to listen on port:', PORT);
+
 app.listen(process.env.PORT || 3001, '0.0.0.0', () => console.log('Server running'));
