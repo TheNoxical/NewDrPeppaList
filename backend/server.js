@@ -27,7 +27,7 @@ app.use(session({
 }));
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.CLIENT_URL,
     credentials: true
 }));
 
@@ -139,4 +139,4 @@ app.post('/api/setup', async (req, res) => {
     }
 });
 
-app.listen(3001, () => console.log('Server running on port 3001'));
+app.listen(process.env.PORT || 3001, () => console.log('Server running on port 3001'));

@@ -6,7 +6,7 @@ export function useAuth() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:3001/api/me', { credentials: 'include' })
+        fetch(`${import.meta.env.VITE_API_URL}/api/me`, { credentials: 'include' })
             .then(res => res.ok ? res.json() : null)
             .then(data => {
                 setUser(data);
@@ -17,8 +17,8 @@ export function useAuth() {
             .catch(() => setUser(null));
     }, []);
 
-    const login = () => window.location.href = 'http://localhost:3001/auth/discord';
-    const logout = () => window.location.href = 'http://localhost:3001/auth/logout';
+    const login = () => window.location.href = `${import.meta.env.VITE_API_URL}/auth/discord`;
+    const logout = () => window.location.href = `${import.meta.env.VITE_API_URL}/auth/logout`;
 
     return { user, login, logout };
 }

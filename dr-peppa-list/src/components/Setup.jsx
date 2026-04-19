@@ -14,7 +14,7 @@ function Setup() {
         }
 
         try {
-            const res = await fetch('http://localhost:3001/api/setup', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/setup`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
