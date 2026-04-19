@@ -146,23 +146,15 @@ app.post('/api/setup', async (req, res) => {
 
         req.session.user = rows[0];
 
-        console.log('Session user set:', req.session.user);
-        console.log('Session ID:', req.session.id);
-
         req.session.save((err) => {
             if (err) {
                 console.error('Session save error:', err);
-            } else {
-                console.log('Session saved successfully');
+                return res.status(500).json({ error: 'Failed to save session' });
             }
-            if (!rows[0].display_name) {
-                res.redirect(`${process.env.CLIENT_URL}/setup`);
-            } else {
-                res.redirect(process.env.CLIENT_URL);
-            }
+            console.log('Session saved successfully');
+            res.json(rows[0]);
         });
-
-        res.json(rows[0]);
+        
     } catch (err) {
         console.log(err);
         res.status(500).json({ error: 'Failed to save username' });
