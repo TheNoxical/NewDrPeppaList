@@ -147,4 +147,12 @@ app.post('/api/setup', async (req, res) => {
     }
 });
 
+process.on('uncaughtException', (err) => {
+    console.error('Uncaught exception:', err);
+});
+
+process.on('unhandledRejection', (err) => {
+    console.error('Unhandled rejection:', err);
+});
+
 app.listen(process.env.PORT || 3001, () => console.log('Server running'));
