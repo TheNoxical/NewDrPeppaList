@@ -6,6 +6,7 @@ export function useAuth() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        console.log('API URL: ', import.meta.env.VITE_API_URL);
         fetch(`${import.meta.env.VITE_API_URL}/api/me`, { credentials: 'include' })
             .then(res => res.ok ? res.json() : null)
             .then(data => {
