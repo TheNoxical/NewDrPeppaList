@@ -37,6 +37,7 @@ function Setup() {
         <div className="setupForm">
             <h1>Please choose a display name</h1>
             <p>This is the name that will appear on the site for completions, it doesn't have to match your discord username. If you have a name from the old Dr Peppa List, use that one</p>
+            <p>DO NOT click off this page or one of the top bar to go to another section of the website, as it could mess with the account creation process.</p>
             <input type="text" value={displayName} onChange={e => setDisplayName(e.target.value)} placeholder="Enter a display name" />
             <button onClick={handleSubmit}>Continue</button>
             {error && <p className="submitError">{error}</p>}
