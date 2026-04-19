@@ -5,4 +5,5 @@ body, html {
   background-color: #1c1b1f;
   color: white;
   font-family: 'Quicksand';
+  overflow: hidden;
 }

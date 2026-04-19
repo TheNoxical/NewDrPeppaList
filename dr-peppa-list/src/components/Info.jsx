@@ -36,6 +36,17 @@ function Info(props) {
         return <h1>Loading...</h1>
     } else {
 
+        const enj = peppaEnjoyment(levelValues.records);
+        let peppaUnreliableMarker = "";
+        if (enj[1] < 3) {
+            peppaUnreliableMarker = "*"
+        }
+
+        let edelUnreliableMarker = "";
+        if (levelInfo[levelIndex].is_edel_pending) {
+            edelUnreliableMarker = "*";
+        }
+
         return (
             <>
                 <h1 className="levelName">{level}</h1>
@@ -53,11 +64,11 @@ function Info(props) {
                     </div>
                     <div className="edelEnjoyment">
                         <h2>EDEL Enjoyment</h2>
-                        <h1>{Math.round(levelInfo[levelIndex].edel_enjoyment* 100) / 100}</h1>
+                        <h1>{(Math.round(levelInfo[levelIndex].edel_enjoyment * 100) / 100) + edelUnreliableMarker}</h1>
                     </div>
                     <div className="peppaEnjoyment">
                         <h2>Peppa Enjoyment</h2>
-                        <h1>{peppaEnjoyment(levelValues.records)}</h1>
+                        <h1>{enj[0] + peppaUnreliableMarker}</h1>
                     </div>
                     <div className="nlwTier">
                         <h2>NLW Tier</h2>
@@ -126,10 +137,12 @@ function peppaEnjoyment(victorsData) {
     if (totalEnjoymentCount === 0) {
         return "-";
     }
+
     let average = enjoymentSum / totalEnjoymentCount;
     average = Math.round(average * 100) / 100;
-    return average;
+    return [average, totalEnjoymentCount];
 }
+
 
 function mapLevelCreators(levelCreators, publisherFallback) {
     if (!levelCreators) {

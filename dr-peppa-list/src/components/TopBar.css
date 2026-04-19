@@ -59,6 +59,18 @@ button.recordSubmit:active {
     justify-content: flex-end;
 }
 
+#userStuff div {
+    display: flex;
+    align-items: center;
+}
+
+.profileDisplay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
 /* .active {
     background-color: #42ae33;
     border-radius: 5px;
@@ -66,4 +78,55 @@ button.recordSubmit:active {
 
 a {
     text-decoration: none;
+}
+
+.userProfile {
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+}
+
+.displayNameText {
+    margin: 0;
+}
+
+.logoutButton {
+    all: unset;
+    height: 30px;
+    margin: 5px;
+    color: black;
+    border-radius: 10px;
+    background-color: rgb(231, 146, 125);
+    padding: 5px;
+    transition: all 0.1s ease-in-out;
+}
+
+.logoutButton:hover {
+    transform: scale(1.05);
+    background-color: rgb(230, 115, 87);
+
+}
+
+.logoutButton:active {
+    transform: scale(0.95);
+}
+
+.discordSignIn {
+    all: unset;
+    color: black;
+    background-color: rgb(47, 209, 47);
+    margin: 10px;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: all 0.1s ease-in-out;
+}
+
+.discordSignIn:hover {
+    transform: scale(1.05);
+    background-color: rgb(22, 241, 22);
+}
+
+.discordSignIn:active {
+    transform: scale(0.95);
 }

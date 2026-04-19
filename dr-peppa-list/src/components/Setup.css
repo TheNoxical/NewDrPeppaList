@@ -1,0 +1,56 @@
+.setupForm {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.setupForm h1 {
+    margin-bottom: 5px;
+}
+
+.setupForm p {
+    margin-top: 5px;
+}
+
+.setupForm input[type="text"] {
+    all: unset;
+    width: 50%;
+    height: 30px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bolder;
+    background-color: rgb(235, 231, 231);
+    color: black;
+}
+
+.setupForm button {
+    all: unset;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+    max-width: 10%;
+    width: 10%;
+    height: 30px;
+    border-radius: 10px;
+    background-color: rgb(60, 160, 82);
+    color: black;
+    font-weight: bolder;
+    border: rgb(60, 160, 82) solid 2px;
+    transition: all 0.2s ease-in-out;
+}
+
+.setupForm button:hover {
+    transform: scale(1.05);
+    background-color: rgb(65, 192, 92);
+}
+
+.setupForm button:active {
+    transform: scale(0.98);
+}
+
+.submitError {
+    color: rgb(201, 79, 79);
+    font-weight: bolder;
+}

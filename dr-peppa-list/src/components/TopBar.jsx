@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './TopBar.css';
 import placeholder from '../assets/placeholder.png'
-import { BrowserRouter, Route, Routes, NavLink, Navigate } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, NavLink, Navigate, useLocation } from 'react-router-dom'
 import List from './pages/List.jsx';
 import Leaderboard from './pages/Leaderboard.jsx';
 import './Tab.css';
 import Info from './Info.jsx';
+import Setup from './Setup.jsx';
+import UserSection from './UserSection.jsx';
 
 
 class TopBar extends Component {
@@ -30,12 +32,12 @@ class TopBar extends Component {
 
     render() {
         return (
-            <BrowserRouter>
+            <div>
                 <div id="topbar">
                     <div id="imageStuff">
                         <img src={placeholder} alt="logo" height="50px" width="50px" />
                         <h1>DPL</h1>
-                            <code>v0.1.0</code>
+                            <code>v0.1.1</code>
                     </div>
                     <div id="tabs">
                         <NavLink to="/List" className="tab">List</NavLink>
@@ -44,8 +46,7 @@ class TopBar extends Component {
                     </div>
                     <div id="userStuff">
                         <button className="recordSubmit">Submit A Record</button>
-                        <img src={placeholder} alt="discord icon" height="50px" width="50px" />
-                        <img src={placeholder} alt="user icon" height="50px" width="50px" />
+                        <UserSection />
                     </div>
                 </div>
                 <Routes>
@@ -54,9 +55,10 @@ class TopBar extends Component {
                         <Route path="/List/:level" element={<Info levelInfo={this.state.listData} levelsList={this.state.peppaList} aredlSortedList={this.state.aredlSortedList}/>} />
                     </Route>
                     <Route path="/Leaderboard" element={<Leaderboard />} />
-                    <Route path="/Packs" element={<h1>AHHHHHHHHH</h1>} />
+                    <Route path="/Packs" element={<h1>Placeholder</h1>} />
+                    <Route path="/setup" element={<Setup />} />
                 </Routes>
-            </BrowserRouter>
+            </div>
         );
     }
 }
