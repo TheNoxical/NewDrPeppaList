@@ -12,6 +12,14 @@ const app = express();
 const db = new pg.Pool({
     connectionString: process.env.DATABASE_URL
 });
+db.connect((err, client, release) => {
+    if (err) {
+        console.error('Database connection error: ' + err);
+    } else {
+        console.log('Database connected successfully!');
+        release();
+    }
+});
 
 app.use(express.json());
 
