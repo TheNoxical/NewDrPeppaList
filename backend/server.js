@@ -155,4 +155,4 @@ process.on('unhandledRejection', (err) => {
     console.error('Unhandled rejection:', err);
 });
 
-app.listen(process.env.PORT || 3001, () => console.log('Server running'));
+app.listen(process.env.PORT || 3001, '0.0.0.0', () => console.log('Server running'));
