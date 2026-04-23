@@ -222,6 +222,26 @@ app.post('/api/setup', async (req, res) => {
     }
 });
 
+
+app.get('/api/user/:displayName', async (req, res) => {
+    const { displayName } = req.params;
+
+    try {
+        const { rows } = await db.query(`
+            SELECT id, discord_id, username, avatar, created_at, display_name FROM users WHERE display_name = $1
+            `, [displayName]);
+
+        if (!rows[0]) {
+            res.status(404).json({ error: "User not found" });
+        }
+
+        res.json(rows[0]);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: "Failed to get user" });
+    }
+})
+
 process.on('uncaughtException', (err) => {
     console.error('Uncaught exception:', err);
 });

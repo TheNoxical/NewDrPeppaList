@@ -8,6 +8,7 @@ import './Tab.css';
 import Info from './Info.jsx';
 import Setup from './Setup.jsx';
 import UserSection from './UserSection.jsx';
+import UserPage from './pages/UserPage.jsx';
 
 
 class TopBar extends Component {
@@ -19,7 +20,7 @@ class TopBar extends Component {
             listData: [],
             peppaList: [],
             aredlSortedList: [],
-            level: props.params
+            level: props.params,
         };
     }
 
@@ -37,7 +38,7 @@ class TopBar extends Component {
                     <div id="imageStuff">
                         <img src={placeholder} alt="logo" height="50px" width="50px" />
                         <h1>DPL</h1>
-                            <code>v0.1.1</code>
+                            <code>v0.2.0</code>
                     </div>
                     <div id="tabs">
                         <NavLink to="/List" className="tab">List</NavLink>
@@ -54,9 +55,10 @@ class TopBar extends Component {
                     <Route path="/List" element={<List hoistFunction={this.hoistListToState} />}>
                         <Route path="/List/:level" element={<Info levelInfo={this.state.listData} levelsList={this.state.peppaList} aredlSortedList={this.state.aredlSortedList}/>} />
                     </Route>
-                    <Route path="/Leaderboard" element={<Leaderboard />} />
+                    <Route path="/Leaderboard" element={<Leaderboard aredlSortedList={this.props.aredlSortedList} peppaSortedList={this.props.peppaSortedList} />} />
                     <Route path="/Packs" element={<h1>Placeholder</h1>} />
                     <Route path="/setup" element={<Setup />} />
+                    <Route path="/User/:displayName" element={<UserPage />} />
                 </Routes>
             </div>
         );

@@ -1,9 +1,10 @@
 import React from 'react';
 import { useAuth } from './useAuth.js';
+import { useNavigate } from 'react-router-dom';
 
 function UserSection() {
     const { user, login, logout } = useAuth();
-    console.log(user);
+    const navigate = useNavigate();
 
     if (user === undefined) {
         return <div>Loading...</div>;
@@ -19,7 +20,7 @@ function UserSection() {
         <div>
             <button className="logoutButton" onClick={logout}>Log Out</button>
             <div className="profileDisplay">
-                <img src={`https://cdn.discordapp.com/avatars/${user.discord_id}/${user.avatar}.png`} alt="avatar" height="50px" width="50px" className="userProfile" />
+                <button className="noBtnStyles hoverAnim" onClick={() => { navigate(`/User/${user.display_name}`) }}><img src={`https://cdn.discordapp.com/avatars/${user.discord_id}/${user.avatar}.png`} alt="avatar" height="50px" width="50px" className="userProfile" /></button>
             </div>
         </div>
     );

@@ -1,0 +1,77 @@
+.leaderboardContainer {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    height: calc(100vh - 100px);
+}
+
+.rankingsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    margin-top: 20px;
+}
+
+.completionsContainer {
+    display: flex;
+    align-items: center;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.userCard {
+    display: flex;
+    border-radius: 10px;
+    transition: all 0.1s ease-in-out;
+}
+
+.userCard:hover {
+    transform: scale(1.02);
+    background-color: #4c4952;
+}
+
+.userCard:active {
+    transform: scale(0.98);
+}
+
+.userCard h1 {
+    margin: 5px;
+    padding: 5px;
+}
+
+.activeUser {
+    background-color: #4c4952;
+}
+
+.currentUserDisplay {
+    font-size: xxx-large;
+}
+
+.leaderboardInfoCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5px;
+    width: 50%;
+}
+
+.leaderboardInfoCard h1 {
+    margin: 5px;
+    display: flex;
+}
+
+.bigLabel {
+    font-size: xxx-large;
+    margin: 10px;
+    padding: 10px;
+}
+
+.mappedCompletion {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fullCompletions {
+    width: 100%;
+}

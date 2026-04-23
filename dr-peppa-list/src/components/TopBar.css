@@ -99,6 +99,7 @@ a {
     background-color: rgb(231, 146, 125);
     padding: 5px;
     transition: all 0.1s ease-in-out;
+    font-weight: bold;
 }
 
 .logoutButton:hover {
@@ -130,3 +131,31 @@ a {
 .discordSignIn:active {
     transform: scale(0.95);
 }
+
+.noBtnStyles {
+    all: unset;
+}
+
+.hoverAnim {
+    transition: transform 0.1s ease-in-out;
+}
+
+.hoverAnim:hover {
+    transform: scale(1.05);
+}
+
+.hoverAnim:active {
+    transform: scale(0.95);
+}
+
+.hoverAnimSmall {
+    transition: transform 0.15s ease-in-out;
+}
+
+.hoverAnimSmall:hover {
+    transform: scale(1.02);
+}
+
+/* .hoverAnimSmall:active {
+    transform: scale(0.98);
+} */

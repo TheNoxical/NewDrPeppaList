@@ -1,0 +1,81 @@
+.userContainer {
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    gap: 0px 20px;
+    height: calc(100vh - 100px);
+
+    /* position: relative; */
+
+}
+
+/* .userContainer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: grayscale(80%) blur(10px);
+    z-index: 0;
+
+
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+} */
+
+/* .userContainer > * {
+    z-index: 1;
+} */
+
+.rounded {
+    border-radius: 50%;
+}
+
+.userProfile {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 5px;
+}
+
+.completionsContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.completionCard {
+    width: 90%;
+    background-size: cover;
+    background-position: center;
+    margin: 10px;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.completionCard div {
+    z-index: 1;
+}
+
+.completionCard div * {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.pointsDisplay {
+    margin-top: 0;
+    margin-left: 20px;
+}
+
+.lvlDisplay {
+    margin-bottom: 0;
+}
+
+.completionLink {
+    filter: drop-shadow(2px 2px 6px rgba(0, 0, 0, 0.8));
+}
