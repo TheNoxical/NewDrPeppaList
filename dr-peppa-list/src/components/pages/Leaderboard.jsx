@@ -91,7 +91,6 @@ function Leaderboard(props) {
         </div>
     });
 
-    console.log("Completed", completedList, "Progressed", progressedList)
 
     let infoCard = <div className="leaderboardInfoCard">
         <Link to={`/User/${active}`} className="noBtnStyles"><h1 className="currentUserDisplay underlineEffect">{`#${activeIndex + 1} ${active}`}</h1></Link>

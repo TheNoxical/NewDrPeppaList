@@ -17,10 +17,6 @@ function Victors(props) {
         .then(data => setVictorsList(data.records));
     }, [level]);
 
-    console.log("Level", level);
-
-    console.log("Sorted List", aredlSortedList);
-
 
     useEffect(() => {
         if (level === undefined) {

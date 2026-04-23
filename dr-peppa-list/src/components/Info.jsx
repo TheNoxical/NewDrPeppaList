@@ -65,7 +65,7 @@ function Info(props) {
                     </div>
                     <div className="edelEnjoyment">
                         <h2>EDEL Enjoyment</h2>
-                        <h1>{(Math.round(levelInfo[levelIndex].edel_enjoyment * 100) / 100) + edelUnreliableMarker}</h1>
+                        <h1>{(levelInfo[levelIndex].edel_enjoyment > 0) ? (Math.round(levelInfo[levelIndex].edel_enjoyment * 100) / 100) + edelUnreliableMarker : "-"}</h1>
                     </div>
                     <div className="peppaEnjoyment">
                         <h2>Peppa Enjoyment</h2>
