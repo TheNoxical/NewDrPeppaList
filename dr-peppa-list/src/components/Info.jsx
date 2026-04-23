@@ -32,6 +32,7 @@ function Info(props) {
         return <h3 key={tag} className="tag">{tag}</h3>
     });
 
+
     if (!levelValues) {
         return <h1>Loading...</h1>
     } else {

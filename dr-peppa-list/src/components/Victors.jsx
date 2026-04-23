@@ -1,18 +1,31 @@
 import React, { useState, useEffect} from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './Victors.css';
 import Youtube_Icon from '../assets/Youtube_Icon.png';
 
 function Victors(props) {
 
     const { level } = useParams();
-
+    const { aredlSortedList } = props;
     const [ victorsList, setVictorsList ] = useState(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`/list/${level}.json`)
         .then(res => res.json())
         .then(data => setVictorsList(data.records));
+    }, [level]);
+
+    console.log("Level", level);
+
+    console.log("Sorted List", aredlSortedList);
+
+
+    useEffect(() => {
+        if (level === undefined) {
+            navigate(`/List/${aredlSortedList[0].name}`)
+        }
     }, [level]);
 
     if (!victorsList) {

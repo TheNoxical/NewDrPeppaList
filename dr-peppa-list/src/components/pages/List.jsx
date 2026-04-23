@@ -195,7 +195,7 @@ class List extends Component {
                         <Outlet />
                     </div>
                     <div className="victorsContainer">
-                        <Victors />
+                        <Victors  aredlSortedList={this.props.listSort} />
                     </div>
                 </div>
             );
