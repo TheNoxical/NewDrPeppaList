@@ -52,7 +52,7 @@ class TopBar extends Component {
                 </div>
                 <Routes>
                     <Route path="/" element={<Navigate replace to={`/List`} />} />
-                    <Route path="/List" element={<List hoistFunction={this.hoistListToState} listSort={this.props.aredlSortedList} />}>
+                    <Route path="/List" element={<List hoistFunction={this.hoistListToState} listSort={this.props.aredlSortedList} aredlSort={this.props.aredlSortedList} />}>
                         <Route path="/List/:level" element={<Info levelInfo={this.state.listData} levelsList={this.state.peppaList} aredlSortedList={this.state.aredlSortedList}/>} />
                     </Route>
                     <Route path="/Leaderboard" element={<Leaderboard aredlSortedList={this.props.aredlSortedList} peppaSortedList={this.props.peppaSortedList} />} />
